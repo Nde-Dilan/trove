@@ -81,7 +81,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="flex-1 flex flex-col items-center justify-center pt-40 pb-20 px-4 text-center relative overflow-hidden">
+      <section className="flex-1 flex flex-col items-center pt-32 pb-20 px-4 text-center relative overflow-hidden">
         {/* Dynamic Background */}
         <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-full max-w-[1000px] aspect-square bg-primary/5 rounded-full blur-[140px] -z-10 animate-pulse" />
 
@@ -90,21 +90,21 @@ export default function Home() {
             <Sparkles size={14} />
             ORGANIZE YOUR DIGITAL WORLD
           </div>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-foreground leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            Every link,  beautifully <br />
+          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-foreground leading-[0.95] animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            Every link,{" "}
             <span className="italic font-serif text-primary/80">
-            
+              beautifully
             </span>{" "}
             archived.
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground animate-in fade-in slide-in-from-bottom-10 duration-1000 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground animate-in fade-in slide-in-from-bottom-10 duration-1000 max-w-2xl mx-auto leading-relaxed">
             The minimal bookmark manager designed for focused creators. Organize
             with elegance, synchronize with ease.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 animate-in fade-in slide-in-from-bottom-12 duration-1000">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-12 duration-1000">
             <Button
               size="lg"
-              className="px-10 h-14 text-md font-bold tracking-tight"
+              className="px-10 h-14 text-md font-bold tracking-tight rounded-xl shadow-lg shadow-primary/10"
               asChild
             >
               <Link href="/register">
@@ -119,7 +119,7 @@ export default function Home() {
         </div>
 
         {/* Hero Preview - Smart Light/Dark Screenshots */}
-        <div className="mt-24 w-full max-w-6xl px-4 animate-in fade-in slide-in-from-bottom-16 duration-1000">
+        <div className="mt-12 w-full max-w-6xl px-4 animate-in fade-in slide-in-from-bottom-16 duration-1000">
           <div className="relative group">
             {/* Ambient Glow */}
             <div className="absolute -inset-8 bg-primary/5 rounded-[3rem] blur-3xl opacity-0" />

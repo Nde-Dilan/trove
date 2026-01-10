@@ -2,7 +2,7 @@
 
 **Trove** is a modern, minimalist bookmark manager designed for focused creators. It helps you organize your digital library with elegance, synchronize with ease, and find what you need in milliseconds.
 
-![Trove Preview](/dashboard-dark.png)
+![Trove Preview](public/dashboard-dark.png)
 
 ## ✨ Features
 
