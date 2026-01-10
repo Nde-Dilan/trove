@@ -1,0 +1,212 @@
+"use client"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldSeparator,
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import Link from "next/link"
+import { useState } from "react"
+import { supabase } from "@/integrations/supabase/supabase"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
+import { loginSchema } from "@/lib/validations/auth"
+import * as z from "zod"
+import { Sparkles, Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react"
+
+export function LoginForm({
+  className,
+  ...props
+}: React.ComponentProps<"form">) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [useMagicLink, setUseMagicLink] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setErrors({})
+
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get("email") as string
+    const password = formData.get("password") as string
+
+    try {
+      if (useMagicLink) {
+        if (!email) {
+          toast.error("Please enter your email")
+          setIsLoading(false)
+          return
+        }
+
+        const { error } = await supabase.auth.signInWithOtp({
+          email,
+          options: {
+            emailRedirectTo: `${window.location.origin}/callback`,
+          },
+        })
+
+        if (error) throw error
+        toast.success("Magic link sent! Check your email.")
+        setIsLoading(false)
+        return
+      }
+
+      // Validation Zod for password login
+      loginSchema.parse({ email, password })
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (error) throw error
+
+      toast.success("Welcome back!")
+      router.push("/")
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        const newErrors: Record<string, string> = {}
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            newErrors[err.path[0].toString()] = err.message
+          }
+        })
+        setErrors(newErrors)
+      } else {
+        toast.error(error.message || "Invalid login credentials")
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <form 
+      onSubmit={handleLogin}
+      className={cn("flex flex-col gap-6", className)} 
+      {...props}
+    >
+      <FieldGroup>
+        <div className="flex flex-col items-center gap-1 text-center">
+          <h1 className="text-2xl font-bold tracking-tight">Login to your account</h1>
+          <p className="text-muted-foreground text-sm text-balance">
+            {useMagicLink 
+              ? "Enter your email for a secure magic link" 
+              : "Enter your email below to login to your account"}
+          </p>
+        </div>
+
+        <Field>
+          <FieldLabel htmlFor="email">Email Address</FieldLabel>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input 
+              id="email" 
+              name="email" 
+              type="email" 
+              placeholder="you@example.com" 
+              required 
+              disabled={isLoading}
+              className="pl-10 h-11"
+            />
+          </div>
+          {errors.email && (
+            <p className="text-xs text-destructive mt-1">{errors.email}</p>
+          )}
+        </Field>
+
+        {!useMagicLink && (
+          <Field>
+            <div className="flex items-center">
+              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <Link
+                href="/forgot-password"
+                className="ml-auto text-sm underline-offset-4 hover:underline"
+              >
+                Forgot your password?
+              </Link>
+            </div>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Input 
+                id="password" 
+                name="password" 
+                type={showPassword ? "text" : "password"} 
+                placeholder="••••••••"
+                required={!useMagicLink}
+                disabled={isLoading}
+                className="pl-10 pr-10 h-11"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              </button>
+            </div>
+            {errors.password && (
+              <p className="text-xs text-destructive mt-1">{errors.password}</p>
+            )}
+          </Field>
+        )}
+
+        <div className="flex items-center justify-between rounded-2xl border border-border/80 bg-muted/40 px-4 py-3.5 transition-all">
+          <div className="space-y-0.5">
+            <p className="text-sm font-semibold">Magic Link Login</p>
+            <p className="text-[10px] text-muted-foreground">Receive a secure access link via email</p>
+          </div>
+          <Switch
+            checked={useMagicLink}
+            onCheckedChange={setUseMagicLink}
+            disabled={isLoading}
+          />
+        </div>
+
+        <Field>
+          <Button type="submit" className="w-full h-11 font-bold shadow-sm" disabled={isLoading}>
+            {isLoading ? (
+              <Loader2 className="mr-2 size-4 animate-spin" />
+            ) : null}
+            {useMagicLink ? (
+              <>
+                Send Magic Link
+                <Sparkles className="ml-2 size-4" />
+              </>
+            ) : (
+              "Sign In"
+            )}
+          </Button>
+        </Field>
+
+        <FieldSeparator>Or continue with</FieldSeparator>
+        <Field>
+          <Button variant="outline" type="button" className="w-full h-11" disabled={isLoading}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="mr-2 h-4 w-4">
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                fill="currentColor"
+              />
+            </svg>
+            GitHub
+          </Button>
+          <FieldDescription className="text-center mt-4">
+            Don&apos;t have an account?{" "}
+            <Link href="/register" className="underline underline-offset-4 text-primary font-medium">
+              Sign up
+            </Link>
+          </FieldDescription>
+        </Field>
+      </FieldGroup>
+    </form>
+  )
+}
