@@ -19,6 +19,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import {
   Drawer,
@@ -58,7 +59,9 @@ export function BookmarkDetailsDialog({
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent className="max-h-[90vh]">
-          
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>{bookmark.title}</DrawerTitle>
+          </DrawerHeader>
           <div className="px-6 py-4 overflow-y-auto space-y-6">
             <div className="flex items-center gap-4">
               <div className="size-14 rounded-lg bg-secondary p-2 flex items-center justify-center overflow-hidden border border-border/60">
@@ -175,6 +178,7 @@ export function BookmarkDetailsDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[75vw] w-[70vw] h-[70vh] p-0 overflow-hidden border-border/50 bg-background rounded-xl shadow-2xl">
+        <DialogTitle className="sr-only">{bookmark.title}</DialogTitle>
         <div className="grid grid-cols-[400px_1fr] h-full items-stretch">
           <div className="p-10 border-r border-border/50 flex flex-col gap-8 overflow-y-auto">
             <div className="space-y-6">
