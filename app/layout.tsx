@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import PWAInstallPrompt from "@/components/pwa-prompt";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,10 +17,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Trove - Bookmarks Manager",
-  description: "A simple and elegant bookmarks manager to organize your web discoveries.",
+  description:
+    "A simple and elegant bookmarks manager to organize your web discoveries.",
   openGraph: {
     title: "Trove - Bookmarks Manager",
-    description: "A simple and elegant bookmarks manager to organize your web discoveries.",
+    description:
+      "A simple and elegant bookmarks manager to organize your web discoveries.",
     url: process.env.NEXT_PUBLIC_APP_URL,
     siteName: "Trove",
     images: [
@@ -36,7 +39,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Trove - Bookmarks Manager",
-    description: "A simple and elegant bookmarks manager to organize your web discoveries.",
+    description:
+      "A simple and elegant bookmarks manager to organize your web discoveries.",
     images: ["/og-image.png"],
     creator: "@trove",
   },
@@ -64,6 +68,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <PWAInstallPrompt delayMs={2000} />
           <Sonner
             position="top-right"
             expand={false}
