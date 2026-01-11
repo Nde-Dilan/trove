@@ -46,8 +46,8 @@ export function StatsCards() {
           key={stat.label}
           className={cn(
             "flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl border transition-all duration-300 shadow-sm",
-            stat.color.split(' ')[0], // Utilise le bg-color/10 défini dans l'objet stats
-            stat.color.split(' ')[1].replace('text-', 'border-'), // Utilise la couleur de texte pour la bordure
+            stat.color.split(' ')[0],
+            stat.color.split(' ')[1].replace('text-', 'border-'),
             "border-opacity-10 hover:border-opacity-30"
           )}
         >
@@ -55,7 +55,7 @@ export function StatsCards() {
             className={cn(
               "shrink-0 flex items-center justify-center rounded-xl",
               "size-8 md:size-10",
-              stat.color // Garde le fond coloré pour l'icône aussi pour le contraste
+              stat.color
             )}
           >
             <stat.icon className="size-4 md:size-5" />

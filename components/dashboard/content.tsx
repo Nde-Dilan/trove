@@ -51,15 +51,24 @@ export function BookmarksContent() {
   const hasActiveFilters =
     selectedTags.length > 0 || filterType !== "all" || sortBy !== "date-newest";
 
-  if (loading && filteredBookmarks.length === 0) {
+  if (loading) {
     return (
       <div className="flex-1 w-full overflow-auto">
         <div className="p-4 md:p-6 space-y-6">
+          {/* Skeleton pour les cartes de statistiques */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-24 sm:h-32 rounded-3xl border bg-card/20 animate-pulse" />
+              <div key={`stat-${i}`} className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-2xl border bg-card/50">
+                <div className="size-8 md:size-10 rounded-xl bg-muted animate-pulse" />
+                <div className="min-w-0 flex-1">
+                  <div className="h-6 w-12 bg-muted animate-pulse rounded mb-1" />
+                  <div className="h-4 w-20 bg-muted animate-pulse rounded" />
+                </div>
+              </div>
             ))}
           </div>
+          
+          {/* Skeleton pour la grille de bookmarks */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
