@@ -66,7 +66,7 @@ export default function Home() {
               asChild
               className="hidden sm:flex gap-2"
             >
-              <Link href="https://github.com" target="_blank">
+              <Link href="https://github.com/kevinkenfack/trove" target="_blank">
                 <Github size={18} />
                 <span>View on GitHub</span>
               </Link>
@@ -103,8 +103,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-12 duration-1000">
             <Button
-              size="lg"
-              className="px-10 h-14 text-md font-bold tracking-tight rounded-xl shadow-lg shadow-primary/10"
+              className="px-5 h-12 text-md font-bold tracking-tight rounded-lg"
               asChild
             >
               <Link href="/register">
@@ -169,7 +168,7 @@ export default function Home() {
           ].map((feature, i) => (
             <div
               key={i}
-              className="group p-8 rounded-[2rem] bg-card/40 backdrop-blur-sm border border-border/50 hover:border-primary/20 transition-all hover:translate-y-[-4px] text-left"
+              className="group p-8 rounded-lg bg-card/40 backdrop-blur-sm border border-border/50 hover:border-primary/20 transition-all hover:translate-y-[-4px] text-left"
             >
               <div
                 className={`size-12 rounded-2xl ${feature.bg} ${feature.color} flex items-center justify-center mb-6`}
@@ -198,7 +197,11 @@ export default function Home() {
             <Link href="#" className="hover:text-primary transition-colors">
               Twitter
             </Link>
-            <Link href="#" className="hover:text-primary transition-colors">
+            <Link
+              href="https://github.com/kevinkenfack/trove"
+              target="_blank"
+              className="hover:text-primary transition-colors"
+            >
               GitHub
             </Link>
             <Link href="#" className="hover:text-primary transition-colors">
