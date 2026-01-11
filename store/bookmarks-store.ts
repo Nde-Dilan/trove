@@ -1,6 +1,17 @@
 import { create } from "zustand";
-import { type Bookmark } from "@/mock-data/bookmarks";
-export type { Bookmark };
+export type Bookmark = {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  favicon: string;
+  collectionId: string | null;
+  tags: string[];
+  createdAt: string;
+  isFavorite: boolean;
+  hasDarkIcon?: boolean;
+  status?: "active" | "archived" | "trash";
+};
 import { supabase } from "@/integrations/supabase/supabase";
 import { getRandomTagColor } from "@/lib/tag-colors";
 

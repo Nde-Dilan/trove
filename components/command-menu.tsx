@@ -62,8 +62,8 @@ export function CommandMenu({ navItems, className }: CommandMenuProps) {
       >
         <Search className="h-4 w-4 text-muted-foreground" />
         <span className="flex-1 text-left">Search...</span>
-        <kbd className="rounded-lg border px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
-          Ctrl K
+        <kbd className="rounded border px-1.5 py-0.5 right-2 top-1/2 text-[11px] font-medium text-muted-foreground">
+          ⌘K
         </kbd>
       </Button>
 

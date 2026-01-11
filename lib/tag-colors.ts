@@ -7,6 +7,14 @@ export const TAG_COLORS = [
   "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-200/50 dark:border-indigo-800/50",
   "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-200/50 dark:border-cyan-800/50",
   "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-200/50 dark:border-orange-800/50",
+  "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-200/50 dark:border-teal-800/50",
+  "bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-200/50 dark:border-pink-800/50",
+  "bg-lime-500/10 text-lime-600 dark:text-lime-400 border-lime-200/50 dark:border-lime-800/50",
+  "bg-fuchsia-500/10 text-fuchsia-600 dark:text-fuchsia-400 border-fuchsia-200/50 dark:border-fuchsia-800/50",
+  "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-200/50 dark:border-violet-800/50",
+  "bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-200/50 dark:border-sky-800/50",
+  "bg-red-500/10 text-red-600 dark:text-red-400 border-red-200/50 dark:border-red-800/50",
+  "bg-green-500/10 text-green-600 dark:text-green-400 border-green-200/50 dark:border-green-800/50",
 ];
 
 export function getRandomTagColor() {

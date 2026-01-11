@@ -12,8 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { useBookmarksStore } from "@/store/bookmarks-store";
-import { type Bookmark } from "@/mock-data/bookmarks";
+import { useBookmarksStore, type Bookmark } from "@/store/bookmarks-store";
 import { toast } from "sonner";
 import { EditBookmarkDialog } from "./edit-bookmark-dialog";
 import { DeleteConfirmDialog } from "@/components/delete-confirm-dialog";

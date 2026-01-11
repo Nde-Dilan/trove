@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { type Bookmark } from "@/mock-data/bookmarks";
-import { useBookmarksStore } from "@/store/bookmarks-store";
+import { type Bookmark, useBookmarksStore } from "@/store/bookmarks-store";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Dialog,

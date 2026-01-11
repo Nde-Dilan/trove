@@ -55,6 +55,7 @@ import {
   Zap,
   Coffee,
   Globe,
+  X,
 } from "lucide-react";
 import { useBookmarksStore } from "@/store/bookmarks-store";
 import { DeleteConfirmDialog } from "@/components/delete-confirm-dialog";
@@ -101,10 +102,25 @@ export function BookmarksSidebar({
     collections,
     tags,
     deleteTag,
+    searchQuery,
+    setSearchQuery,
   } = useBookmarksStore();
 
   const [user, setUser] = React.useState<any>(null);
   const [deleteTagId, setDeleteTagId] = React.useState<string | null>(null);
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   React.useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -180,9 +196,20 @@ export function BookmarksSidebar({
         <div className="relative mb-4">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
+            ref={searchInputRef}
             placeholder="Search Bookmarks..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9 pr-10 h-9 bg-background"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute right-10 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            >
+              <X className="size-3.5" />
+            </button>
+          )}
           <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-muted px-1.5 py-0.5 rounded text-[11px] text-muted-foreground font-medium">
             ⌘K
           </div>
