@@ -62,7 +62,7 @@ export default function AuthCallback() {
         </div>
 
         {/* Status Card */}
-        <div className="w-full max-w-sm bg-card border border-border/50 rounded-2xl p-8 space-y-8 animate-in fade-in zoom-in duration-1000 delay-300">
+        <div className="w-full max-w-sm bg-card border border-border/50 rounded-lg p-8 space-y-8 animate-in fade-in zoom-in duration-1000 delay-300">
           <div className="flex flex-col items-center gap-6">
             <div className="relative flex size-20 items-center justify-center">
               <div className="absolute inset-0 rounded-full border-t-2 border-primary animate-spin" />
@@ -82,7 +82,7 @@ export default function AuthCallback() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-3 py-3 px-6 bg-muted border rounded-full">
+          <div className="flex items-center justify-center gap-3 py-3 px-6 bg-muted border rounded-lg">
             <Loader2 className="size-4 animate-spin text-primary" />
             <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
               Setting up your space
