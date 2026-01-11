@@ -112,7 +112,7 @@ export function BookmarkDetailsDialog({
                       <Badge
                         key={tag.id}
                         variant="secondary"
-                        className={cn("text-[10px] py-0.5 px-2 font-normal rounded-md", tag.color)}
+                        className={cn("text-[10px] py-0.5 px-2 font-bold rounded-md border", tag.color || "bg-muted text-muted-foreground border-border/50")}
                       >
                         {tag.name}
                       </Badge>
@@ -142,9 +142,9 @@ export function BookmarkDetailsDialog({
                 <Globe className="size-3.5" />
                 Preview Snapshot
               </h3>
-              <div className="relative overflow-hidden rounded-lg border border-border/60 bg-muted/40">
+              <div className="relative aspect-video overflow-hidden rounded-lg border border-border/60 bg-muted/40">
                 {!previewLoaded && !previewError && (
-                  <Skeleton className="h-64 w-full" />
+                  <Skeleton className="h-full w-full rounded-none" />
                 )}
                 {previewError ? (
                   <div className="flex h-64 flex-col items-center justify-center gap-2 text-muted-foreground/40">
@@ -242,7 +242,7 @@ export function BookmarkDetailsDialog({
                       <Badge
                         key={tag.id}
                         variant="secondary"
-                        className={cn("text-[10px] py-0.5 px-2 font-normal rounded-md", tag.color)}
+                        className={cn("text-[10px] py-0.5 px-2 font-bold rounded-md border", tag.color || "bg-muted text-muted-foreground border-border/50")}
                       >
                         {tag.name}
                       </Badge>

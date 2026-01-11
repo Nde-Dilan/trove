@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { type Bookmark } from "@/mock-data/bookmarks";
 export type { Bookmark };
 import { supabase } from "@/integrations/supabase/supabase";
+import { getRandomTagColor } from "@/lib/tag-colors";
 
 export type Collection = {
   id: string;
@@ -441,9 +442,11 @@ export const useBookmarksStore = create<BookmarksState>((set, get) => ({
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("User not authenticated");
 
+      const tagColor = getRandomTagColor();
+
       const { data, error } = await supabase
         .from("tags")
-        .insert({ name, user_id: user.id })
+        .insert({ name, color: tagColor, user_id: user.id })
         .select()
         .single();
       

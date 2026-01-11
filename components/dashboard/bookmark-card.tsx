@@ -428,15 +428,15 @@ export function BookmarkCard({
                 <span
                   key={tag.id}
                   className={cn(
-                    "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium",
-                    tag.color
+                    "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold border",
+                    tag.color || "bg-muted text-muted-foreground border-border/50"
                   )}
                 >
                   {tag.name}
                 </span>
               ))}
               {bookmarkTags.length > 3 && (
-                <span className="text-[10px] text-muted-foreground py-0.5">
+                <span className="text-[10px] text-muted-foreground font-medium py-0.5">
                   +{bookmarkTags.length - 3} more
                 </span>
               )}
